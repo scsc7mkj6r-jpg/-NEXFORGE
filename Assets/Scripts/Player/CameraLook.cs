@@ -3,20 +3,25 @@ using UnityEngine;
 public class CameraLook : MonoBehaviour
 {
     public Transform playerBody;
-    public float sensitivity = 150f;
+    public CameraTouchInput touchInput;
+    public float sensitivity = 0.15f;
 
     private float xRotation = 0f;
 
-    public void Look(Vector2 input)
+    private void Update()
     {
-        float mouseX = input.x * sensitivity * Time.deltaTime;
-        float mouseY = input.y * sensitivity * Time.deltaTime;
+        if (touchInput == null || playerBody == null)
+            return;
+
+        Vector2 input = touchInput.GetLookDelta();
+
+        float mouseX = input.x * sensitivity;
+        float mouseY = input.y * sensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -85f, 85f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
         playerBody.Rotate(Vector3.up * mouseX);
     }
 }
