@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float gravity = -9.81f;
 
+    public MobileControls mobileControls;
+
     private CharacterController controller;
     private Vector3 velocity;
 
@@ -16,21 +18,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        Vector2 input = mobileControls != null
+            ? mobileControls.MovementInput
+            : Vector2.zero;
 
-        Vector3 move = transform.right * x
-                     + transform.forward * z;
+        Vector3 move = transform.right * input.x
+                     + transform.forward * input.y;
 
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (controller.isGrounded && velocity.y < 0)
-        {
             velocity.y = -2f;
-        }
 
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
     }
 }
