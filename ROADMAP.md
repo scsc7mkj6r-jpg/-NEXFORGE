@@ -1,21 +1,31 @@
 # NEXFORGE — DEVELOPMENT ROADMAP
 
-## Phase 1 — Planning
-- Define the game concept
-- Choose the unique gameplay mechanic
+## Phase 1 — Game Concept
+- Realistic military FPS
+- Dynamic Battlefield mechanic
+- Define maps and game modes
 
 ## Phase 2 — Prototype
-- Create a basic 3D map
-- Add player movement
-- Add camera controls
+- Create a basic 3D environment
+- Add first-person player movement
+- Add camera and basic interactions
 
-## Phase 3 — Multiplayer
-- Connect multiple players
-- Test 2–4 players
+## Phase 3 — Gameplay
+- Create a test map
+- Add basic game objectives
+- Test the Dynamic Battlefield concept
 
-## Phase 4 — Expansion
-- Test 10, 20, 50 and eventually 100 players
-- Optimize performance
+## Phase 4 — Multiplayer
+- Start with 2–4 players
+- Test 10 and 20 players
+- Gradually test 50 and 100 players
 
-## Phase 5 — Release
-- Build and publish the game
+## Phase 5 — Optimization
+- Improve graphics and performance
+- Test network stability
+- Fix bugs
+
+## Phase 6 — Release
+- Prepare the game build
+- Run public tests
+- Plan launch
