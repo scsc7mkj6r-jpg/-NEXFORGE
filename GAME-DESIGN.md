@@ -1,13 +1,27 @@
 # NEXFORGE — GAME DESIGN
 
 ## Genre
-Multiplayer 3D First-Person Shooter
+Realistic Military Multiplayer FPS
 
-## Main Goal
-Create an original FPS game with unique gameplay mechanics.
+## Main Vision
+Create a realistic and competitive military FPS game.
+
+## Core Mechanic — Dynamic Battlefield
+- The battlefield changes during matches.
+- Some routes become unavailable.
+- New routes and areas become accessible.
+- Weather and visibility conditions can change.
+- Teams must adapt their strategies.
 
 ## Match Size
-Target: Up to 100 players.
+Long-term target: Up to 100 players.
+
+## Game Priorities
+- Realistic visual atmosphere
+- Team-based gameplay
+- Tactical decision-making
+- Smooth performance
+- Fair multiplayer experience
 
 ## Development Stage
-Concept and planning.
+Early concept and planning.
