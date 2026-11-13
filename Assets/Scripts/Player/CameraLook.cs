@@ -4,7 +4,7 @@ public class CameraLook : MonoBehaviour
 {
     public Transform playerBody;
     public CameraTouchInput touchInput;
-    public float sensitivity = 0.15f;
+    public CameraSettings cameraSettings;
 
     private float xRotation = 0f;
 
@@ -12,6 +12,10 @@ public class CameraLook : MonoBehaviour
     {
         if (touchInput == null || playerBody == null)
             return;
+
+        float sensitivity = cameraSettings != null
+            ? cameraSettings.sensitivity
+            : 0.15f;
 
         Vector2 input = touchInput.GetLookDelta();
 
