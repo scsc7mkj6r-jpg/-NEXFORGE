@@ -2,20 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(TeamMember))]
 public class PlayerRespawn : MonoBehaviour
 {
-    [Header("Spawn Settings")]
     public SpawnManager spawnManager;
-    public string teamName = "Alpha";
     public float respawnDelay = 3f;
 
     private PlayerHealth health;
+    private TeamMember teamMember;
     private CharacterController controller;
     private bool isRespawning;
 
     private void Awake()
     {
         health = GetComponent<PlayerHealth>();
+        teamMember = GetComponent<TeamMember>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -42,12 +43,12 @@ public class PlayerRespawn : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
 
         Transform point = spawnManager != null
-            ? spawnManager.GetSpawnPoint(teamName)
+            ? spawnManager.GetSpawnPoint(teamMember.TeamName)
             : null;
 
         if (point == null)
         {
-            Debug.LogError("NEXFORGE: Spawn point not found!");
+            Debug.LogError("NEXFORGE: Team spawn point not found!");
             isRespawning = false;
             yield break;
         }
@@ -55,10 +56,7 @@ public class PlayerRespawn : MonoBehaviour
         if (controller != null)
             controller.enabled = false;
 
-        transform.SetPositionAndRotation(
-            point.position,
-            point.rotation
-        );
+        transform.SetPositionAndRotation(point.position, point.rotation);
 
         if (controller != null)
             controller.enabled = true;
