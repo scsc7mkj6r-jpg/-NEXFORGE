@@ -3,11 +3,9 @@ using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Health")]
     public float maxHealth = 100f;
 
     public float CurrentHealth { get; private set; }
-
     public bool IsAlive => CurrentHealth > 0f;
 
     public event Action<float, float> OnHealthChanged;
