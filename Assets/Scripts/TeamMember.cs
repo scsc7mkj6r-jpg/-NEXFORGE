@@ -7,6 +7,16 @@ public class TeamMember : MonoBehaviour
 
     public string TeamName => teamName;
 
+    private void OnEnable()
+    {
+        PlayerRegistry.RegisterPlayer(this);
+    }
+
+    private void OnDisable()
+    {
+        PlayerRegistry.UnregisterPlayer(this);
+    }
+
     public void SetTeam(string newTeam)
     {
         if (string.IsNullOrWhiteSpace(newTeam))
