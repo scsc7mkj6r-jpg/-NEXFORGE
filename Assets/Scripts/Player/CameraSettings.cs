@@ -9,4 +9,4 @@ public class CameraSettings : MonoBehaviour
     {
         sensitivity = Mathf.Clamp(value, 0.05f, 1f);
     }
-}
+} 
