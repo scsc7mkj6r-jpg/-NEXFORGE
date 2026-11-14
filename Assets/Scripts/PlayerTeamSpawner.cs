@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class PlayerTeamSpawner : MonoBehaviour
 {
-    public SpawnManager spawnManager;
-    public string teamName = "Alpha";
+    [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private string teamName = "Alpha";
 
-    public void SpawnPlayer(GameObject player)
+    public bool SpawnPlayer(GameObject player)
     {
         if (player == null || spawnManager == null)
-            return;
+            return false;
 
-        Transform spawnPoint = spawnManager.GetSpawnPoint(teamName);
+        Transform point = spawnManager.GetSpawnPoint(teamName);
 
-        if (spawnPoint == null)
-            return;
+        if (point == null)
+        {
+            Debug.LogError("NEXFORGE: Team spawn point not found!");
+            return false;
+        }
 
         CharacterController controller =
             player.GetComponent<CharacterController>();
@@ -22,8 +25,8 @@ public class PlayerTeamSpawner : MonoBehaviour
             controller.enabled = false;
 
         player.transform.SetPositionAndRotation(
-            spawnPoint.position,
-            spawnPoint.rotation
+            point.position,
+            point.rotation
         );
 
         if (controller != null)
@@ -33,5 +36,7 @@ public class PlayerTeamSpawner : MonoBehaviour
 
         if (member != null)
             member.SetTeam(teamName);
+
+        return true;
     }
 }
