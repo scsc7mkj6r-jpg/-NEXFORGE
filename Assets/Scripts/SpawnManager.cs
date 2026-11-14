@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public SpawnPoint[] spawnPoints;
+    [SerializeField] private SpawnPoint[] spawnPoints;
 
     public Transform GetSpawnPoint(string teamName)
     {
@@ -15,8 +15,11 @@ public class SpawnManager : MonoBehaviour
                 return point.transform;
         }
 
-        return spawnPoints[0] != null
-            ? spawnPoints[0].transform
-            : null;
+        return null;
+    }
+
+    public bool HasSpawnPoint(string teamName)
+    {
+        return GetSpawnPoint(teamName) != null;
     }
 }
