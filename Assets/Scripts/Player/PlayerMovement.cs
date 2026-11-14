@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed = 5.1f;
     public float gravity = -9.81f;
 
@@ -11,12 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
 
-    void Start()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 input = mobileControls != null
             ? mobileControls.MovementInput
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        if (controller.isGrounded && velocity.y < 0)
+        if (controller.isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
         velocity.y += gravity * Time.deltaTime;
