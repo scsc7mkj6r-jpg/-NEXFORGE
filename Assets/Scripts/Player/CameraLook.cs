@@ -6,26 +6,31 @@ public class CameraLook : MonoBehaviour
     public CameraTouchInput touchInput;
     public CameraSettings cameraSettings;
 
-    private float xRotation = 0f;
+    [SerializeField] private float defaultSensitivity = 0.15f;
+    [SerializeField] private float minVerticalAngle = -85f;
+    [SerializeField] private float maxVerticalAngle = 85f;
+
+    private float xRotation;
 
     private void Update()
     {
-        if (touchInput == null || playerBody == null)
+        if (playerBody == null || touchInput == null)
             return;
 
         float sensitivity = cameraSettings != null
             ? cameraSettings.sensitivity
-            : 0.15f;
+            : defaultSensitivity;
 
         Vector2 input = touchInput.GetLookDelta();
 
-        float mouseX = input.x * sensitivity;
-        float mouseY = input.y * sensitivity;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+        xRotation -= input.y * sensitivity;
+        xRotation = Mathf.Clamp(
+            xRotation,
+            minVerticalAngle,
+            maxVerticalAngle
+        );
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        playerBody.Rotate(Vector3.up * input.x * sensitivity);
     }
 }
