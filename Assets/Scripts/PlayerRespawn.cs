@@ -4,7 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(PlayerHealth))]
 public class PlayerRespawn : MonoBehaviour
 {
-    public Transform spawnPoint;
+    public SpawnManager spawnManager;
+    public string teamName = "Alpha";
     public float respawnDelay = 3f;
 
     private PlayerHealth health;
@@ -39,14 +40,18 @@ public class PlayerRespawn : MonoBehaviour
 
         yield return new WaitForSeconds(respawnDelay);
 
-        if (spawnPoint != null)
+        Transform point = spawnManager != null
+            ? spawnManager.GetSpawnPoint(teamName)
+            : null;
+
+        if (point != null)
         {
             if (controller != null)
                 controller.enabled = false;
 
             transform.SetPositionAndRotation(
-                spawnPoint.position,
-                spawnPoint.rotation
+                point.position,
+                point.rotation
             );
 
             if (controller != null)
