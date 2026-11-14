@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(PlayerHealth))]
 public class PlayerRespawn : MonoBehaviour
 {
+    [Header("Spawn Settings")]
     public SpawnManager spawnManager;
     public string teamName = "Alpha";
     public float respawnDelay = 3f;
@@ -44,19 +45,23 @@ public class PlayerRespawn : MonoBehaviour
             ? spawnManager.GetSpawnPoint(teamName)
             : null;
 
-        if (point != null)
+        if (point == null)
         {
-            if (controller != null)
-                controller.enabled = false;
-
-            transform.SetPositionAndRotation(
-                point.position,
-                point.rotation
-            );
-
-            if (controller != null)
-                controller.enabled = true;
+            Debug.LogError("NEXFORGE: Spawn point not found!");
+            isRespawning = false;
+            yield break;
         }
+
+        if (controller != null)
+            controller.enabled = false;
+
+        transform.SetPositionAndRotation(
+            point.position,
+            point.rotation
+        );
+
+        if (controller != null)
+            controller.enabled = true;
 
         health.ResetHealth();
         isRespawning = false;
